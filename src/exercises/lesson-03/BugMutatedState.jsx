@@ -10,11 +10,10 @@
 
 import { useState } from 'react';
 export default function BugMutatedState() {
-  let [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
   function handleAdd() {
-    count++;
-    setCount(count);
+    setCount((prevCount) => prevCount + 1);
   }
 
   return (
@@ -26,4 +25,9 @@ export default function BugMutatedState() {
 }
 
 // Explanation:
-// (Write your explanation here)
+/*
+Changed let to const to prevent reassignment. Used an updater function inside 
+'handleAdd' which calculates the new value based on the current state without 
+changing the original variable. The new value is passed to setCount, and React 
+updates and re-render the UI.
+*/
